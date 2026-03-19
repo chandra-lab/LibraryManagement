@@ -1,0 +1,66 @@
+@model LibraryManagement.Models.Book
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Books</a></li>
+        <li class="breadcrumb-item active">@Model.Title</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="bi bi-book"></i> @Model.Title</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Author</dt>
+                    <dd class="col-sm-9">
+                        <a asp-controller="Author" asp-action="Details" asp-route-id="@Model.AuthorId">@Model.Author?.FullName</a>
+                    </dd>
+                    <dt class="col-sm-3">ISBN</dt>
+                    <dd class="col-sm-9">@(Model.ISBN ?? "N/A")</dd>
+                    <dt class="col-sm-3">Genre</dt>
+                    <dd class="col-sm-9"><span class="badge bg-secondary">@(Model.Genre ?? "N/A")</span></dd>
+                    <dt class="col-sm-3">Published</dt>
+                    <dd class="col-sm-9">@(Model.PublishedYear?.ToString() ?? "Unknown")</dd>
+                    <dt class="col-sm-3">Publisher</dt>
+                    <dd class="col-sm-9">@(Model.Publisher ?? "N/A")</dd>
+                    <dt class="col-sm-3">Total Copies</dt>
+                    <dd class="col-sm-9">@Model.TotalCopies</dd>
+                    <dt class="col-sm-3">Available</dt>
+                    <dd class="col-sm-9">
+                        @if (Model.AvailableCopies > 0)
+                        {
+                            <span class="badge bg-success">@Model.AvailableCopies available</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Currently unavailable</span>
+                        }
+                    </dd>
+                    <dt class="col-sm-3">Branch</dt>
+                    <dd class="col-sm-9">
+                        @if (Model.LibraryBranch != null)
+                        {
+                            <a asp-controller="LibraryBranch" asp-action="Details" asp-route-id="@Model.LibraryBranchId">@Model.LibraryBranch.BranchName</a>
+                        }
+                        else { <span class="text-muted">N/A</span> }
+                    </dd>
+                    <dt class="col-sm-3">Description</dt>
+                    <dd class="col-sm-9">@(Model.Description ?? "No description available.")</dd>
+                </dl>
+            </div>
+            <div class="card-footer">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="bi bi-pencil"></i> Edit</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</a>
+                <a asp-action="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

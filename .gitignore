@@ -1,0 +1,34 @@
+# Build outputs
+bin/
+obj/
+
+# Database file (contains real data)
+Database/library.db
+Database/*.db
+
+# User secrets (contains Google/GitHub credentials)
+secrets.json
+
+# Visual Studio / VS Code
+.vs/
+*.user
+*.suo
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# NuGet packages (restored via dotnet restore)
+*.nupkg
+packages/
+
+# Logs
+*.log
+logs/
+
+# Third party libraries (restored via npm/libman)
+wwwroot/lib/
+
+# Environment specific
+appsettings.Production.json

@@ -1,0 +1,102 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-5"><i class="bi bi-book text-primary"></i> Library Management System</h1>
+        <p class="lead text-muted">Welcome to the Library Management Dashboard</p>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-sm-6 col-xl-3">
+        <a asp-controller="Book" asp-action="Index" class="text-decoration-none">
+            <div class="card border-primary h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-book display-4 text-primary"></i>
+                    <h2 class="display-4 fw-bold text-primary">@ViewBag.BookCount</h2>
+                    <p class="card-text text-muted">Total Books</p>
+                    <small class="text-success"><i class="bi bi-check-circle"></i> @ViewBag.AvailableBooks available</small>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <a asp-controller="Author" asp-action="Index" class="text-decoration-none">
+            <div class="card border-success h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-person-lines-fill display-4 text-success"></i>
+                    <h2 class="display-4 fw-bold text-success">@ViewBag.AuthorCount</h2>
+                    <p class="card-text text-muted">Authors</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <a asp-controller="Customer" asp-action="Index" class="text-decoration-none">
+            <div class="card border-info h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-people display-4 text-info"></i>
+                    <h2 class="display-4 fw-bold text-info">@ViewBag.CustomerCount</h2>
+                    <p class="card-text text-muted">Customers</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <a asp-controller="LibraryBranch" asp-action="Index" class="text-decoration-none">
+            <div class="card border-warning h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-building display-4 text-warning"></i>
+                    <h2 class="display-4 fw-bold text-warning">@ViewBag.BranchCount</h2>
+                    <p class="card-text text-muted">Library Branches</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-plus-circle"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a asp-controller="Book" asp-action="Create" class="btn btn-outline-primary">
+                        <i class="bi bi-plus"></i> Add New Book
+                    </a>
+                    <a asp-controller="Author" asp-action="Create" class="btn btn-outline-success">
+                        <i class="bi bi-plus"></i> Add New Author
+                    </a>
+                    <a asp-controller="Customer" asp-action="Create" class="btn btn-outline-info">
+                        <i class="bi bi-plus"></i> Register Customer
+                    </a>
+                    <a asp-controller="LibraryBranch" asp-action="Create" class="btn btn-outline-warning">
+                        <i class="bi bi-plus"></i> Add Library Branch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0"><i class="bi bi-info-circle"></i> About this System</h5>
+            </div>
+            <div class="card-body">
+                <p>This Library Management System is built with:</p>
+                <ul>
+                    <li><strong>ASP.NET Core MVC</strong> (.NET 10)</li>
+                    <li><strong>Entity Framework Core</strong> (ORM)</li>
+                    <li><strong>SQLite</strong> Database</li>
+                    <li>Full <strong>CRUD</strong> operations for all entities</li>
+                    <li>Bootstrap 5 UI</li>
+                </ul>
+                <p class="text-muted small">CSCI 6809 &ndash; Project Deliverable A</p>
+            </div>
+        </div>
+    </div>
+</div>

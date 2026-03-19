@@ -1,0 +1,27 @@
+@model LibraryManagement.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 text-center">
+        <div class="card border-danger shadow">
+            <div class="card-body py-5">
+                <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 4rem;"></i>
+                <h1 class="display-4 text-danger mt-3">@(ViewBag.StatusCode ?? "Error")</h1>
+                <p class="lead">@ViewBag.ErrorMessage</p>
+
+                @if (Model.ShowRequestId)
+                {
+                    <p class="text-muted small">
+                        <strong>Request ID:</strong> @Model.RequestId
+                    </p>
+                }
+
+                <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">
+                    <i class="bi bi-house"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

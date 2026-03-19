@@ -1,0 +1,76 @@
+@model IEnumerable<LibraryManagement.Models.Book>
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="bi bi-book text-primary"></i> Books</h2>
+    <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add Book</a>
+</div>
+
+<form method="get" class="row g-2 mb-4">
+    <div class="col-md-5">
+        <input type="text" name="searchTerm" value="@ViewBag.SearchTerm" class="form-control" placeholder="Search by title or author..." />
+    </div>
+    <div class="col-md-3">
+        <select name="genre" class="form-select" asp-items="ViewBag.Genres">
+            <option value="">All Genres</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-search"></i> Search</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+    </div>
+</form>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="table-primary">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                    <th>Available</th>
+                    <th>Branch</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td><strong>@book.Title</strong></td>
+                        <td>@book.Author?.FullName</td>
+                        <td><span class="badge bg-secondary">@book.Genre</span></td>
+                        <td>@book.PublishedYear</td>
+                        <td>
+                            @if (book.AvailableCopies > 0)
+                            {
+                                <span class="badge bg-success">@book.AvailableCopies / @book.TotalCopies</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Unavailable</span>
+                            }
+                        </td>
+                        <td><small>@book.LibraryBranch?.BranchName</small></td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></a>
+                            <a asp-action="Edit" asp-route-id="@book.Id" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></a>
+                            <a asp-action="Delete" asp-route-id="@book.Id" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="7" class="text-center text-muted py-4">No books found.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted">
+        Showing @Model.Count() book(s)
+    </div>
+</div>
