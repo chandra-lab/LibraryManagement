@@ -47,6 +47,13 @@ var app = builder.Build();
 // Apply DB on startup
 using (var scope = app.Services.CreateScope())
 {
+    // Create Database folder if it doesn't exist
+    var dbPath = Path.Combine(Directory.GetCurrentDirectory(), "Database");
+    if (!Directory.Exists(dbPath))
+    {
+        Directory.CreateDirectory(dbPath);
+    }
+    
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     db.Database.EnsureCreated();
 }
