@@ -1,0 +1,86 @@
+@page
+@model ExternalLoginsModel
+@{
+    ViewData["Title"] = "External Logins";
+    ViewData["ActivePage"] = ManageNavPages.ExternalLogins;
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="px-4 py-3">
+    <div class="card border-0 mb-3" style="background: linear-gradient(135deg, #0d6efd, #0a58ca); border-radius: 12px;">
+        <div class="card-body py-3 px-4">
+            <div class="d-flex align-items-center gap-3">
+                <div class="rounded-circle d-flex align-items-center justify-content-center"
+                     style="width:50px;height:50px;min-width:50px;background:rgba(255,255,255,0.2);">
+                    <i class="bi bi-person-fill text-white" style="font-size:1.4rem;"></i>
+                </div>
+                <div>
+                    <h6 class="mb-0 fw-bold text-white">@User.Identity!.Name</h6>
+                    <small class="text-white opacity-75">Library Management Account</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-3">
+            @await Html.PartialAsync("_ProfileNav", "ExternalLogins")
+        </div>
+        <div class="col-md-9">
+            <div class="card border-0" style="border-radius:12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                <div class="card-header bg-white border-bottom py-3 px-4" style="border-radius:12px 12px 0 0;">
+                    <h6 class="mb-0 fw-bold">
+                        <i class="bi bi-box-arrow-in-right text-primary me-2"></i> External Logins
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+
+                    <partial name="_StatusMessage" for="StatusMessage" />
+                    @if (Model.CurrentLogins?.Count > 0)
+                    {
+                        <h6 class="fw-semibold mb-3">Connected Accounts</h6>
+                        <div class="list-group mb-4">
+                            @foreach (var login in Model.CurrentLogins)
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                    <div class="d-flex align-items-center gap-2">
+                                        @if (login.LoginProvider == "Google") { <i class="bi bi-google text-danger fs-5"></i> }
+                                        else if (login.LoginProvider == "GitHub") { <i class="bi bi-github fs-5"></i> }
+                                        else { <i class="bi bi-person-badge fs-5 text-primary"></i> }
+                                        <span class="fw-semibold">@login.LoginProvider</span>
+                                    </div>
+                                    @if (Model.ShowRemoveButton)
+                                    {
+                                        <form asp-page-handler="RemoveLogin" method="post">
+                                            <input type="hidden" name="LoginProvider" value="@login.LoginProvider" />
+                                            <input type="hidden" name="ProviderKey" value="@login.ProviderKey" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-x-circle"></i> Remove
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                    @if (Model.OtherLogins?.Count > 0)
+                    {
+                        <h6 class="fw-semibold mb-3">Add Another Account</h6>
+                        <form asp-page-handler="LinkLogin" method="post">
+                            <div class="d-flex gap-2 flex-wrap">
+                                @foreach (var provider in Model.OtherLogins)
+                                {
+                                    <button type="submit" name="provider" value="@provider.Name" class="btn btn-outline-secondary">
+                                        @if (provider.Name == "Google") { <i class="bi bi-google text-danger me-1"></i> }
+                                        else if (provider.Name == "GitHub") { <i class="bi bi-github me-1"></i> }
+                                        Connect @provider.DisplayName
+                                    </button>
+                                }
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

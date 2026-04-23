@@ -1,0 +1,40 @@
+@model string
+@{
+    string active = Model ?? "Index";
+}
+<div class="card border-0" style="background:#f8f9fa;">
+    <div class="card-body p-2">
+        <nav class="nav flex-column gap-1">
+            <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center gap-2
+                       @(active == "Index" ? "bg-primary text-white fw-semibold" : "text-dark")"
+               asp-page="./Index">
+                <i class="bi bi-person"></i> Profile
+            </a>
+            <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center gap-2
+                       @(active == "Email" ? "bg-primary text-white fw-semibold" : "text-dark")"
+               asp-page="./Email">
+                <i class="bi bi-envelope"></i> Email
+            </a>
+            <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center gap-2
+                       @(active == "ChangePassword" ? "bg-primary text-white fw-semibold" : "text-dark")"
+               asp-page="./ChangePassword">
+                <i class="bi bi-key"></i> Change Password
+            </a>
+            <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center gap-2
+                       @(active == "ExternalLogins" ? "bg-primary text-white fw-semibold" : "text-dark")"
+               asp-page="./ExternalLogins">
+                <i class="bi bi-box-arrow-in-right"></i> External Logins
+            </a>
+            <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center gap-2
+                       @(active == "TwoFactorAuthentication" ? "bg-primary text-white fw-semibold" : "text-dark")"
+               asp-page="./TwoFactorAuthentication">
+                <i class="bi bi-shield-lock"></i> Two-Factor Auth
+            </a>
+            <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center gap-2
+                       @(active == "PersonalData" ? "bg-primary text-white fw-semibold" : "text-dark")"
+               asp-page="./PersonalData">
+                <i class="bi bi-database"></i> Personal Data
+            </a>
+        </nav>
+    </div>
+</div>

@@ -7,8 +7,8 @@
 <div class="row justify-content-center mt-5">
     <div class="col-md-5">
         <div class="card shadow-sm">
-            <div class="card-header bg-primary text-white text-center">
-                <h4><i class="bi bi-book"></i> Library Management</h4>
+            <div class="card-header bg-primary text-white text-center py-3">
+                <h4><i class="bi bi-person-circle"></i> Welcome Back</h4>
                 <p class="mb-0">Sign in to your account</p>
             </div>
             <div class="card-body p-4">
@@ -42,7 +42,8 @@
                 @{
                     if ((Model.ExternalLogins?.Count ?? 0) > 0)
                     {
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl"
+                              method="post">
                             <div class="d-grid gap-2">
                                 @foreach (var provider in Model.ExternalLogins!)
                                 {
